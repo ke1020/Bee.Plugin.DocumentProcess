@@ -1,0 +1,17 @@
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\bin\Debug\net8.0\Bee.Plugin.DocumentProcess.deps.json
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\bin\Debug\net8.0\Bee.Plugin.DocumentProcess.dll
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\bin\Debug\net8.0\Bee.Plugin.DocumentProcess.pdb
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\bin\Debug\net8.0\Bee.Base.dll
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\bin\Debug\net8.0\Bee.Base.pdb
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\Bee.Plugin.DocumentProcess.csproj.AssemblyReference.cache
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\Avalonia\Resources.Inputs.cache
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\Avalonia\resources
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\Bee.Plugin.DocumentProcess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\Bee.Plugin.DocumentProcess.AssemblyInfoInputs.cache
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\Bee.Plugin.DocumentProcess.AssemblyInfo.cs
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\Bee.Plugin.DocumentProcess.csproj.CoreCompileInputs.cache
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\Avalonia\Bee.Plugin.DocumentProcess.dll
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\Avalonia\Bee.Plugin.DocumentProcess.pdb
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\refint\Avalonia\Bee.Plugin.DocumentProcess.dll
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\Bee.Plug.EFD0F19C.Up2Date
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\ref\Bee.Plugin.DocumentProcess.dll
