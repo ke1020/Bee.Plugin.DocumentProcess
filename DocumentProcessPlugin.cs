@@ -1,5 +1,18 @@
 ﻿
+using Bee.Base.Abstractions.Navigation;
 using Bee.Base.Abstractions.Plugin;
+using Bee.Base.Abstractions.Tasks;
+using Bee.Base.ViewModels;
+using Bee.Plugin.DocumentProcess.Models;
+using Bee.Plugin.DocumentProcess.Navigation.Commands;
+using Bee.Plugin.DocumentProcess.Tasks;
+using Bee.Plugin.DocumentProcess.ViewModels;
+using Bee.Plugin.DocumentProcess.Views;
+
+using Ke.Bee.Localization.Providers.Abstractions;
+using Ke.DocumentProcess.Abstrations;
+using Ke.DocumentProcess.Pandoc;
+using Ke.DocumentProcess.Pandoc.Models;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,5 +29,25 @@ public class DocumentProcessPlugin(IServiceProvider serviceProvider) : PluginBas
     public override void RegisterServices(IServiceCollection services)
     {
         services.AddTransient<IPlugin, DocumentProcessPlugin>();
+        services.AddSingleton<ILocalizaitonResourceContributor, DocumentProcessLocalizationResourceContributor>();
+        services.AddSingleton<INavigationCommand, DocumentConvertNavigationCommand>();
+
+        
+        // 注入视图模型
+        services.AddTransient<IndexViewModel>();
+        // 注入文档转换页视图与视图模型
+        services.AddTransient<DocumentConvertView>();
+        services.AddTransient<DocumentConvertViewModel>();
+        // 任务列表视图模型
+        services.AddTransient<TaskListViewModel<DocumentConvertArguments>>();
+        // 任务处理器
+        services.AddTransient<ITaskHandler<DocumentConvertArguments>, DocumentConvertTaskHandler>();
+
+        services.AddSingleton(new PandocDocumentProcessOptions
+        {
+            PandocPath = @"C:\Users\ke\dev\pandoc-3.6\pandoc.exe".Replace('\\', '/'),
+            PdfEnginePath = @"C:\Users\ke\dev\TinyTeX\bin\windows\xelatex.exe"
+        });
+        services.AddTransient<IDocumentConverter, PandocDocumentConverter>();
     }
 }

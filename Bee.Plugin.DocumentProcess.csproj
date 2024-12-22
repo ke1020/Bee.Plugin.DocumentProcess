@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../Bee/Bee.Base/Bee.Base.csproj" />
+    <ProjectReference Include="C:\Users\ke\dev\proj\libs\DocumentProcess\Ke.DocumentProcess.Pandoc\Ke.DocumentProcess.Pandoc.csproj" />
   </ItemGroup>
 
   <Target Name="CopyFilesToDestination" AfterTargets="Build">
@@ -21,10 +22,15 @@
       <FilesToCopy Include="$(OutputPath)**\Bee.Plugin.DocumentProcess.dll" />
       <FilesToCopy Include="$(OutputPath)**\Bee.Plugin.DocumentProcess.pdb" />
       <FilesToCopy Include="$(OutputPath)**\Bee.Plugin.DocumentProcess.deps.json" />
+      <FilesToCopy Include="$(OutputPath)**\Ke.DocumentProcess.Abstrations.dll" />
+      <FilesToCopy Include="$(OutputPath)**\Ke.DocumentProcess.Pandoc.dll" />
+
+      <Source3 Include="bin\release\net8.0\publish\CliWrap.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(CopyToDirectory)\%(RecursiveDir)" />
     <Copy SourceFiles="@(Source1)" DestinationFolder="$(CopyToDirectory)\i18n\" />
     <Copy SourceFiles="@(Source2)" DestinationFolder="$(CopyToDirectory)\Configs\" />
+    <Copy SourceFiles="@(Source3)" DestinationFolder="$(CopyToDirectory)\" />
   </Target>
 
   <ItemGroup>

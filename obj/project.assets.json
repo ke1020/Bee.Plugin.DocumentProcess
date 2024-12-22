@@ -103,6 +103,22 @@
           }
         }
       },
+      "CliWrap/3.7.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Management": "9.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/CliWrap.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/CliWrap.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "CommunityToolkit.Mvvm/8.2.1": {
         "type": "package",
         "compile": {
@@ -238,6 +254,47 @@
           "buildTransitive/Roslyn.Diagnostics.Analyzers.targets": {}
         }
       },
+      "System.CodeDom/9.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/System.CodeDom.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/System.CodeDom.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/_._": {}
+        }
+      },
+      "System.Management/9.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.CodeDom": "9.0.0"
+        },
+        "compile": {
+          "lib/net8.0/System.Management.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/System.Management.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net8.0/System.Management.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "System.Text.Encodings.Web/8.0.0": {
         "type": "package",
         "compile": {
@@ -293,6 +350,30 @@
         },
         "runtime": {
           "bin/placeholder/Bee.Base.dll": {}
+        }
+      },
+      "Ke.DocumentProcess.Abstrations/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Ke.DocumentProcess.Abstrations.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Ke.DocumentProcess.Abstrations.dll": {}
+        }
+      },
+      "Ke.DocumentProcess.Pandoc/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "CliWrap": "3.7.0",
+          "Ke.DocumentProcess.Abstrations": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Ke.DocumentProcess.Pandoc.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Ke.DocumentProcess.Pandoc.dll": {}
         }
       }
     }
@@ -498,6 +579,24 @@
         "lib/net8.0/Avalonia.Remote.Protocol.xml",
         "lib/netstandard2.0/Avalonia.Remote.Protocol.dll",
         "lib/netstandard2.0/Avalonia.Remote.Protocol.xml"
+      ]
+    },
+    "CliWrap/3.7.0": {
+      "sha512": "2RgU3zmQDAD4S8Aq4igWRF31VzzH/zE6kdecLfeozoPZlibahBs9AGSqrk8B6U13K2A65dFRLg/0tNBtBaOH/A==",
+      "type": "package",
+      "path": "cliwrap/3.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "cliwrap.3.7.0.nupkg.sha512",
+        "cliwrap.nuspec",
+        "favicon.png",
+        "lib/net9.0/CliWrap.dll",
+        "lib/net9.0/CliWrap.xml",
+        "lib/netstandard2.0/CliWrap.dll",
+        "lib/netstandard2.0/CliWrap.xml",
+        "lib/netstandard2.1/CliWrap.dll",
+        "lib/netstandard2.1/CliWrap.xml"
       ]
     },
     "CommunityToolkit.Mvvm/8.2.1": {
@@ -1345,6 +1444,63 @@
         "tools/uninstall.ps1"
       ]
     },
+    "System.CodeDom/9.0.0": {
+      "sha512": "oTE5IfuMoET8yaZP/vdvy9xO47guAv/rOhe4DODuFBN3ySprcQOlXqO3j+e/H/YpKKR5sglrxRaZ2HYOhNJrqA==",
+      "type": "package",
+      "path": "system.codedom/9.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/System.CodeDom.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net8.0/_._",
+        "buildTransitive/netcoreapp2.0/System.CodeDom.targets",
+        "lib/net462/System.CodeDom.dll",
+        "lib/net462/System.CodeDom.xml",
+        "lib/net8.0/System.CodeDom.dll",
+        "lib/net8.0/System.CodeDom.xml",
+        "lib/net9.0/System.CodeDom.dll",
+        "lib/net9.0/System.CodeDom.xml",
+        "lib/netstandard2.0/System.CodeDom.dll",
+        "lib/netstandard2.0/System.CodeDom.xml",
+        "system.codedom.9.0.0.nupkg.sha512",
+        "system.codedom.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "System.Management/9.0.0": {
+      "sha512": "bVh4xAMI5grY5GZoklKcMBLirhC8Lqzp63Ft3zXJacwGAlLyFdF4k0qz4pnKIlO6HyL2Z4zqmHm9UkzEo6FFsA==",
+      "type": "package",
+      "path": "system.management/9.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net8.0/_._",
+        "buildTransitive/netcoreapp2.0/System.Management.targets",
+        "lib/net462/_._",
+        "lib/net8.0/System.Management.dll",
+        "lib/net8.0/System.Management.xml",
+        "lib/net9.0/System.Management.dll",
+        "lib/net9.0/System.Management.xml",
+        "lib/netstandard2.0/System.Management.dll",
+        "lib/netstandard2.0/System.Management.xml",
+        "runtimes/win/lib/net8.0/System.Management.dll",
+        "runtimes/win/lib/net8.0/System.Management.xml",
+        "runtimes/win/lib/net9.0/System.Management.dll",
+        "runtimes/win/lib/net9.0/System.Management.xml",
+        "system.management.9.0.0.nupkg.sha512",
+        "system.management.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "System.Text.Encodings.Web/8.0.0": {
       "sha512": "yev/k9GHAEGx2Rg3/tU6MQh4HGBXJs70y7j1LaM1i/ER9po+6nnQ6RRqTJn1E7Xu0fbIFK80Nh5EoODxrbxwBQ==",
       "type": "package",
@@ -1457,11 +1613,22 @@
       "type": "project",
       "path": "../Bee/Bee.Base/Bee.Base.csproj",
       "msbuildProject": "../Bee/Bee.Base/Bee.Base.csproj"
+    },
+    "Ke.DocumentProcess.Abstrations/1.0.0": {
+      "type": "project",
+      "path": "../../libs/DocumentProcess/Ke.DocumentProcess.Abstrations/Ke.DocumentProcess.Abstrations.csproj",
+      "msbuildProject": "../../libs/DocumentProcess/Ke.DocumentProcess.Abstrations/Ke.DocumentProcess.Abstrations.csproj"
+    },
+    "Ke.DocumentProcess.Pandoc/1.0.0": {
+      "type": "project",
+      "path": "../../libs/DocumentProcess/Ke.DocumentProcess.Pandoc/Ke.DocumentProcess.Pandoc.csproj",
+      "msbuildProject": "../../libs/DocumentProcess/Ke.DocumentProcess.Pandoc/Ke.DocumentProcess.Pandoc.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Bee.Base >= 1.0.0",
+      "Ke.DocumentProcess.Pandoc >= 1.0.0",
       "Roslyn.Diagnostics.Analyzers >= 3.11.0-beta1.24527.2"
     ]
   },
@@ -1492,6 +1659,9 @@
           "projectReferences": {
             "C:\\Users\\ke\\dev\\proj\\avalonia\\Bee\\Bee.Base\\Bee.Base.csproj": {
               "projectPath": "C:\\Users\\ke\\dev\\proj\\avalonia\\Bee\\Bee.Base\\Bee.Base.csproj"
+            },
+            "C:\\Users\\ke\\dev\\proj\\libs\\DocumentProcess\\Ke.DocumentProcess.Pandoc\\Ke.DocumentProcess.Pandoc.csproj": {
+              "projectPath": "C:\\Users\\ke\\dev\\proj\\libs\\DocumentProcess\\Ke.DocumentProcess.Pandoc\\Ke.DocumentProcess.Pandoc.csproj"
             }
           }
         }

@@ -7,7 +7,7 @@ namespace Bee.Plugin.DocumentProcess.Navigation.Commands;
 /// 导航命令
 /// </summary>
 /// <param name="vm"></param>
-public class ImageConvertNavigationCommand(IndexViewModel vm) : 
-    NavigationCommandBase<IndexViewModel>(DocumentProcessConsts.PluginName, vm)
+public class DocumentConvertNavigationCommand(IndexViewModel vm) : 
+    NavigationCommandBase<IndexViewModel>("DocumentConvert", vm)
 {
 }

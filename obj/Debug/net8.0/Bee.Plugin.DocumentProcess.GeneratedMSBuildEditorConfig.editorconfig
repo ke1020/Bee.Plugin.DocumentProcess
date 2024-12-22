@@ -43,5 +43,8 @@ build_property.ProjectDir = C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentPro
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 
+[C:/Users/ke/dev/proj/avalonia/Bee.Plugin.DocumentProcess/Views/DocumentConvert/DocumentConvertView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/ke/dev/proj/avalonia/Bee.Plugin.DocumentProcess/Views/IndexView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

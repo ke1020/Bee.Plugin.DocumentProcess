@@ -1,0 +1,65 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i18n="using:Ke.Bee.Localization.Extensions"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+    x:Class="Bee.Plugin.DocumentProcess.Views.DocumentConvertView">
+    <StackPanel>
+        <!-- 输入格式选择 -->
+        <TextBlock Margin="0 5"
+            Text="{i18n:Localize 'Bee.Plugin.DocumentProcess.InputFormat'}" />
+        <ComboBox
+            SelectedValue="{Binding TaskList.TaskArguments.InputFormat, Mode=TwoWay}"
+            HorizontalAlignment="Stretch" ItemsSource="{Binding InputFormats}" Margin="0,0,0,20" />
+
+        <!-- 输出格式选择 -->
+        <TextBlock
+            Margin="0 5"
+            Text="{i18n:Localize 'Bee.Plugin.DocumentProcess.OutputFormat'}" />
+        <ComboBox
+            SelectedValue="{Binding TaskList.TaskArguments.OutputFormat, Mode=TwoWay}"
+            HorizontalAlignment="Stretch" ItemsSource="{Binding OutputFormats}" Margin="0,0,0,20" />
+
+        <!-- 资源路径
+        <TextBlock
+            Margin="0 5"
+            Text="{i18n:Localize 'Bee.Plugin.DocumentProcess.ResourcePath'}" />
+        <TextBox
+            Text="{Binding TaskList.TaskArguments.ResourcePath, Mode=TwoWay}"
+            Watermark="{i18n:Localize 'Bee.Plugin.DocumentProcess.ResourcePath.Placeholder'}" />
+         -->
+
+        <!-- 是否启用独立文件 -->
+        <CheckBox
+            Content="{i18n:Localize 'Bee.Plugin.DocumentProcess.EnableStandalone'}"
+            IsChecked="{Binding TaskList.TaskArguments.EnableStandalone, Mode=TwoWay}" />
+
+
+        <!-- 是否启用请求头
+        <CheckBox
+            Content="{i18n:Localize 'Bee.Plugin.DocumentProcess.EnableRequestHeader'}"
+            IsChecked="{Binding TaskList.TaskArguments.EnableRequestHeader, Mode=TwoWay}" />
+        <TextBox
+            Text="{Binding TaskList.TaskArguments.RequestHeader, Mode=TwoWay}"
+            Watermark="{i18n:Localize 'Bee.Plugin.DocumentProcess.RequestHeader.Placeholder'}" />
+         -->
+
+        <!-- 启用媒体抽取 -->
+        <CheckBox
+            Content="{i18n:Localize 'Bee.Plugin.DocumentProcess.EnableExtractMedia'}"
+            IsChecked="{Binding TaskList.TaskArguments.EnableExtractMedia, Mode=TwoWay}" />
+
+        <!-- 启用嵌入资源 -->
+        <CheckBox
+            Content="{i18n:Localize 'Bee.Plugin.DocumentProcess.EnableEmbedResources'}"
+            IsChecked="{Binding TaskList.TaskArguments.EnableEmbedResources, Mode=TwoWay}" />
+
+        <!-- 启用日志 -->
+        <CheckBox
+            Content="{i18n:Localize 'Bee.Plugin.DocumentProcess.EnableLogFile'}"
+            IsChecked="{Binding TaskList.TaskArguments.EnableLogFile, Mode=TwoWay}" />
+
+
+    </StackPanel>
+</UserControl>

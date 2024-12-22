@@ -15,3 +15,7 @@ C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\Avalon
 C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\refint\Avalonia\Bee.Plugin.DocumentProcess.dll
 C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\Bee.Plug.EFD0F19C.Up2Date
 C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\obj\Debug\net8.0\ref\Bee.Plugin.DocumentProcess.dll
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\bin\Debug\net8.0\Ke.DocumentProcess.Abstrations.dll
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\bin\Debug\net8.0\Ke.DocumentProcess.Pandoc.dll
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\bin\Debug\net8.0\Ke.DocumentProcess.Pandoc.pdb
+C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\bin\Debug\net8.0\Ke.DocumentProcess.Abstrations.pdb
