@@ -1,4 +1,6 @@
 ﻿
+using System.Text.Json;
+
 using Bee.Base.Abstractions.Navigation;
 using Bee.Base.Abstractions.Plugin;
 using Bee.Base.Abstractions.Tasks;
@@ -32,7 +34,6 @@ public class DocumentProcessPlugin(IServiceProvider serviceProvider) : PluginBas
         services.AddSingleton<ILocalizaitonResourceContributor, DocumentProcessLocalizationResourceContributor>();
         services.AddSingleton<INavigationCommand, DocumentConvertNavigationCommand>();
 
-        
         // 注入视图模型
         services.AddTransient<IndexViewModel>();
         // 注入文档转换页视图与视图模型
@@ -43,11 +44,34 @@ public class DocumentProcessPlugin(IServiceProvider serviceProvider) : PluginBas
         // 任务处理器
         services.AddTransient<ITaskHandler<DocumentConvertArguments>, DocumentConvertTaskHandler>();
 
-        services.AddSingleton(new PandocDocumentProcessOptions
-        {
-            PandocPath = @"C:\Users\ke\dev\pandoc-3.6\pandoc.exe".Replace('\\', '/'),
-            PdfEnginePath = @"C:\Users\ke\dev\TinyTeX\bin\windows\xelatex.exe"
-        });
+        //注册文档转换器
         services.AddTransient<IDocumentConverter, PandocDocumentConverter>();
+
+        AddPandoc(services);
+    }
+
+    private void AddPandoc(IServiceCollection services)
+    {
+        // 插件根目录
+        var pluginRootPath = Path.Combine(AppSettings.PluginPath, PluginName);
+        // pandoc 配置文件
+        var pandocConfigPath = Path.Combine(pluginRootPath, "Configs", "pandoc.json");
+        // 文档转换配置
+        PandocDocumentProcessOptions pandocOptions;
+        // 优先使用配置文件中指定的配置
+        if (File.Exists(pandocConfigPath))
+        {
+            pandocOptions = JsonSerializer.Deserialize<PandocDocumentProcessOptions>(File.ReadAllBytes(pandocConfigPath))!;
+        }
+        else
+        {
+            pandocOptions = new PandocDocumentProcessOptions
+            {
+                PandocPath = Path.Combine(pluginRootPath, "pandoc-3.6/pandoc.exe"),
+                PdfEnginePath = Path.Combine(pluginRootPath, "TinyTeX/bin/windows/xelatex.exe")
+            };
+        }
+
+        services.AddSingleton(pandocOptions);
     }
 }

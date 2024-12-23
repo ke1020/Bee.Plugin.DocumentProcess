@@ -34,6 +34,14 @@ public class DocumentConvertArguments : TaskArgumentBase
     /// </summary>
     public bool EnableEmbedResources { get; set; } = false;
     /// <summary>
+    /// 启用目录
+    /// </summary>
+    public bool EnableTableOfContents { get; set; } = false;
+    /// <summary>
+    /// 启用章节编号
+    /// </summary>
+    public bool EnableNumberSections { get; set; } = false;
+    /// <summary>
     /// 请求头
     /// </summary>
     public string? RequestHeader { get; set; }
@@ -41,4 +49,8 @@ public class DocumentConvertArguments : TaskArgumentBase
     /// 资源路径
     /// </summary>
     /// public string? ResourcePath { get; set; }
+    /// <summary>
+    /// 高亮样式
+    /// </summary>
+    public string? HighlightStyle { get; set; }
 }

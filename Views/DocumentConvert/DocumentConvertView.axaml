@@ -11,6 +11,7 @@
             Text="{i18n:Localize 'Bee.Plugin.DocumentProcess.InputFormat'}" />
         <ComboBox
             SelectedValue="{Binding TaskList.TaskArguments.InputFormat, Mode=TwoWay}"
+            PlaceholderText="{i18n:Localize 'Bee.Plugin.DocumentProcess.InputFormat.Placeholder'} }"
             HorizontalAlignment="Stretch" ItemsSource="{Binding InputFormats}" Margin="0,0,0,20" />
 
         <!-- 输出格式选择 -->
@@ -19,6 +20,7 @@
             Text="{i18n:Localize 'Bee.Plugin.DocumentProcess.OutputFormat'}" />
         <ComboBox
             SelectedValue="{Binding TaskList.TaskArguments.OutputFormat, Mode=TwoWay}"
+            PlaceholderText="{i18n:Localize 'Bee.Plugin.DocumentProcess.OutputFormat.Placeholder'}"
             HorizontalAlignment="Stretch" ItemsSource="{Binding OutputFormats}" Margin="0,0,0,20" />
 
         <!-- 资源路径
@@ -29,6 +31,15 @@
             Text="{Binding TaskList.TaskArguments.ResourcePath, Mode=TwoWay}"
             Watermark="{i18n:Localize 'Bee.Plugin.DocumentProcess.ResourcePath.Placeholder'}" />
          -->
+
+        <!-- 高亮样式选择 -->
+        <TextBlock
+            Margin="0 5"
+            Text="{i18n:Localize 'Bee.Plugin.DocumentProcess.HighlightStyle'}" />
+        <ComboBox
+            SelectedValue="{Binding TaskList.TaskArguments.HighlightStyle, Mode=TwoWay}"
+            PlaceholderText="{i18n:Localize 'Bee.Plugin.DocumentProcess.HighlightStyle.Placeholder'}"
+            HorizontalAlignment="Stretch" ItemsSource="{Binding HighlightStyles}" Margin="0,0,0,20" />
 
         <!-- 是否启用独立文件 -->
         <CheckBox
@@ -55,11 +66,21 @@
             Content="{i18n:Localize 'Bee.Plugin.DocumentProcess.EnableEmbedResources'}"
             IsChecked="{Binding TaskList.TaskArguments.EnableEmbedResources, Mode=TwoWay}" />
 
+        <!-- 启用目录表 -->
+        <CheckBox
+            Content="{i18n:Localize 'Bee.Plugin.DocumentProcess.EnableTableOfContents'}"
+            IsChecked="{Binding TaskList.TaskArguments.EnableTableOfContents, Mode=TwoWay}" />
+
+        <!-- 启用章节编号 -->
+        <CheckBox
+            Content="{i18n:Localize 'Bee.Plugin.DocumentProcess.EnableNumberSections'}"
+            IsChecked="{Binding TaskList.TaskArguments.EnableNumberSections, Mode=TwoWay}" />
+
+
         <!-- 启用日志 -->
         <CheckBox
             Content="{i18n:Localize 'Bee.Plugin.DocumentProcess.EnableLogFile'}"
             IsChecked="{Binding TaskList.TaskArguments.EnableLogFile, Mode=TwoWay}" />
-
 
     </StackPanel>
 </UserControl>

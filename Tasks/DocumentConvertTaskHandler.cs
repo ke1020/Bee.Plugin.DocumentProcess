@@ -1,5 +1,3 @@
-using Avalonia.Controls.ApplicationLifetimes;
-
 using Bee.Base.Abstractions.Tasks;
 using Bee.Base.Models.Tasks;
 using Bee.Plugin.DocumentProcess.Models;
@@ -85,6 +83,12 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
         args = argments.EnableEmbedResources ? args.EnableEmbedResources() : args;
         // 输出日志
         args = argments.EnableLogFile ? args.EnableVerbose().EnableLogFile() : args;
+        // 表格目录
+        args = argments.EnableTableOfContents ? args.EnableTableOfContents() : args;
+        // 章节编号
+        args = argments.EnableNumberSections ? args.EnableNumberSections() : args;
+        // 高亮
+        args = !string.IsNullOrWhiteSpace(argments.HighlightStyle) ? args.SetHighlightStyle(argments.HighlightStyle) : args;
 
         // 输入文件是网页格式时，可以指定请求头
         if (argments.EnableRequestHeader)
@@ -100,7 +104,10 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
                 throw new NotSupportedPdfEngineException();
             }
 
-            args = args.SetPdfEngine(_pandocDocumentProcessOptions.PdfEnginePath);
+            args = args.SetPdfEngine(_pandocDocumentProcessOptions.PdfEnginePath)
+                // 未调试成功
+                //.SetTemplate(@"C:\Users\ke\dev\proj\avalonia\Bee.Plugin.DocumentProcess\Configs\pdf.tex")
+                ;
         }
 
         // 忽略警告
