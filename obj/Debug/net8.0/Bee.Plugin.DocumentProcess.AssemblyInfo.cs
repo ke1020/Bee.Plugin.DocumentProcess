@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Bee.Plugin.DocumentProcess")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fab966e2f4581e1a30bdad1060f619614fd5bd16")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bdb900b1d3a60dbdee09372c8df4c5560d425796")]
 [assembly: System.Reflection.AssemblyProductAttribute("Bee.Plugin.DocumentProcess")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Bee.Plugin.DocumentProcess")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
