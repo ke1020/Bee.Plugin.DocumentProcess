@@ -41,6 +41,13 @@
             PlaceholderText="{i18n:Localize 'Bee.Plugin.DocumentProcess.HighlightStyle.Placeholder'}"
             HorizontalAlignment="Stretch" ItemsSource="{Binding HighlightStyles}" Margin="0,0,0,20" />
 
+        <!--并发数-->
+        <TextBlock
+            Text="{i18n:Localize 'Task.MaxDegreeOfParallelism.Label', {Binding #MaxDegree.Value}}" />
+        <Slider x:Name="MaxDegree" Minimum="1" Maximum="32" IsSnapToTickEnabled="True"
+            TickFrequency="1"
+            Value="{Binding TaskList.TaskArguments.MaxDegreeOfParallelism, Mode=TwoWay}" />
+
         <!-- 是否启用独立文件 -->
         <CheckBox
             Content="{i18n:Localize 'Bee.Plugin.DocumentProcess.EnableStandalone'}"

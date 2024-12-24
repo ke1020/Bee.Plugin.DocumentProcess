@@ -21,6 +21,7 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
         Action<double> progressCallback,
         CancellationToken cancellationToken = default)
     {
+        cancellationToken.ThrowIfCancellationRequested();
         if (argments == null)
         {
             throw new ArgumentNullException(nameof(argments));
