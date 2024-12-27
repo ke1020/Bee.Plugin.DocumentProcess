@@ -24,13 +24,10 @@
       <FilesToCopy Include="$(OutputPath)**\Bee.Plugin.DocumentProcess.deps.json" />
       <FilesToCopy Include="$(OutputPath)**\Ke.DocumentProcess.Abstrations.dll" />
       <FilesToCopy Include="$(OutputPath)**\Ke.DocumentProcess.Pandoc.dll" />
-
-      <Source3 Include="bin\release\net8.0\publish\CliWrap.dll" />
     </ItemGroup>
     <Copy SourceFiles="@(FilesToCopy)" DestinationFolder="$(CopyToDirectory)\%(RecursiveDir)" />
     <Copy SourceFiles="@(Source1)" DestinationFolder="$(CopyToDirectory)\i18n\" />
     <Copy SourceFiles="@(Source2)" DestinationFolder="$(CopyToDirectory)\Configs\" />
-    <Copy SourceFiles="@(Source3)" DestinationFolder="$(CopyToDirectory)\" />
   </Target>
 
   <ItemGroup>

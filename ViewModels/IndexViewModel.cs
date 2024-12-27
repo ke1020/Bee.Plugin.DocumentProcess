@@ -1,5 +1,3 @@
-using Avalonia.Controls;
-
 using Bee.Base.Models;
 using Bee.Base.ViewModels;
 using Bee.Plugin.DocumentProcess.Views;
