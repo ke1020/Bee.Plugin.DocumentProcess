@@ -1,3 +1,4 @@
+using Bee.Base.Abstractions;
 using Bee.Base.Abstractions.Tasks;
 using Bee.Base.Models.Tasks;
 using Bee.Plugin.DocumentProcess.Models;
@@ -10,13 +11,14 @@ using Ke.DocumentProcess.Pandoc.Models;
 namespace Bee.Plugin.DocumentProcess.Tasks;
 
 public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
-    PandocDocumentProcessOptions pandocDocumentProcessOptions) :
-    ITaskHandler<DocumentConvertArguments>
+    PandocDocumentProcessOptions pandocDocumentProcessOptions,
+    ICoverHandler coverHandler) :
+    TaskHandlerBase<DocumentConvertArguments> (coverHandler)
 {
     private readonly IDocumentConverter _documentConverter = documentConverter;
     private readonly PandocDocumentProcessOptions _pandocDocumentProcessOptions = pandocDocumentProcessOptions;
 
-    public async Task<bool> ExecuteAsync(TaskItem taskItem,
+    public override async Task<bool> ExecuteAsync(TaskItem taskItem,
         DocumentConvertArguments? argments,
         Action<double> progressCallback,
         CancellationToken cancellationToken = default)
@@ -31,7 +33,7 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
         string inputFormat;
         if (string.IsNullOrWhiteSpace(argments.InputFormat))
         {
-            var ext = Path.GetExtension(taskItem.FileName);
+            var ext = Path.GetExtension(taskItem.Input);
             var exists = _documentConverter.AvailableInputFormats.Values
                 .Any(x => x.Equals(ext, StringComparison.OrdinalIgnoreCase))
                 ;
@@ -61,17 +63,17 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
         }
 
         // 输入文件是否 url 地址
-        bool isUrl = taskItem.FileName.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
-            taskItem.FileName.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
+        bool isUrl = taskItem.Input.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
+            taskItem.Input.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
             ;
 
-        var fileName = Path.GetFileNameWithoutExtension(taskItem.FileName);
+        var fileName = Path.GetFileNameWithoutExtension(taskItem.Input);
         if (string.IsNullOrWhiteSpace(fileName))
         {
             fileName = Guid.NewGuid().ToString();
         }
 
-        var args = new PandocArgumentsBuilder(taskItem.FileName, Path.Combine(argments.OutputDirectory, $"{fileName}{outputExtension}"))
+        var args = new PandocArgumentsBuilder(taskItem.Input, Path.Combine(argments.OutputDirectory, $"{fileName}{outputExtension}"))
             .SetFrom(inputFormat) // 网址没有扩展名，所以显式指定输入格式
             .SetTo(argments.OutputFormat)
             ;
