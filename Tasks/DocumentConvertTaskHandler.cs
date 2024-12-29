@@ -1,8 +1,10 @@
 using Bee.Base.Abstractions;
 using Bee.Base.Abstractions.Tasks;
+using Bee.Base.Models.Plugin;
 using Bee.Base.Models.Tasks;
 using Bee.Plugin.DocumentProcess.Models;
 
+using Ke.Bee.Localization.Localizer.Abstractions;
 using Ke.DocumentProcess.Abstrations;
 using Ke.DocumentProcess.Models.Exceptions;
 using Ke.DocumentProcess.Pandoc;
@@ -12,13 +14,15 @@ namespace Bee.Plugin.DocumentProcess.Tasks;
 
 public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
     PandocDocumentProcessOptions pandocDocumentProcessOptions,
-    ICoverHandler coverHandler) :
+    ICoverHandler coverHandler,
+    ILocalizer localizer) :
     TaskHandlerBase<DocumentConvertArguments> (coverHandler)
 {
     private readonly IDocumentConverter _documentConverter = documentConverter;
     private readonly PandocDocumentProcessOptions _pandocDocumentProcessOptions = pandocDocumentProcessOptions;
+    private readonly ILocalizer _l = localizer;
 
-    public override async Task<bool> ExecuteAsync(TaskItem taskItem,
+    public override async Task<Result> ExecuteAsync(TaskItem taskItem,
         DocumentConvertArguments? argments,
         Action<double> progressCallback,
         CancellationToken cancellationToken = default)
@@ -28,6 +32,8 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
         {
             throw new ArgumentNullException(nameof(argments));
         }
+
+        progressCallback(1);
 
         // 是否显示指定了输入格式
         string inputFormat;
@@ -39,7 +45,8 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
                 ;
             if (!exists)
             {
-                throw new NotSupportedInputFormatException(ext);
+                // throw new NotSupportedInputFormatException(ext);
+                return Result.Fail(_l["Errors.NotSupported.InputFormat"]);
             }
             inputFormat = _documentConverter.AvailableInputFormats
                 .FirstOrDefault(x => x.Value.Equals(ext, StringComparison.OrdinalIgnoreCase))
@@ -51,15 +58,13 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
             inputFormat = argments.InputFormat;
         }
 
-        if (argments.OutputFormat == null)
-        {
-            throw new NotSupportedOutputFormatException();
-        }
+        progressCallback(5);
 
         // 输出扩展名
-        if (!_documentConverter.AvailableOutputFormats.TryGetValue(argments.OutputFormat, out var outputExtension))
+        if (!_documentConverter.AvailableOutputFormats.TryGetValue(argments.OutputFormat ?? string.Empty, out var outputExtension))
         {
-            throw new NotSupportedOutputFormatException(argments.OutputFormat);
+            //throw new NotSupportedOutputFormatException(argments.OutputFormat);
+            return Result.Fail(_l["Errors.NotSupported.OutputFormat"]);
         }
 
         // 输入文件是否 url 地址
@@ -100,7 +105,7 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
         }
 
         // pdf 格式
-        if (argments.OutputFormat.Equals("pdf", StringComparison.OrdinalIgnoreCase))
+        if (argments.OutputFormat?.Equals("pdf", StringComparison.OrdinalIgnoreCase) == true)
         {
             if (string.IsNullOrWhiteSpace(_pandocDocumentProcessOptions.PdfEnginePath))
             {
@@ -116,9 +121,11 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
         // 忽略警告
         args = args.EnableQuiet();
 
+        progressCallback(10);
+
         // 执行转换
         var result = await _documentConverter.ConvertAsync(args.Build(), cancellationToken);
         progressCallback(100);
-        return result.IsSuccess;
+        return !result.IsSuccess ? Result.Fail(_l["Bee.Plugin.DocumentProcess.Fail.Convert"]) : Result.Success();
     }
 }
