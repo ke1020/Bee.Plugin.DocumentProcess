@@ -16,7 +16,7 @@ public class DocumentConvertArguments : TaskArgumentBase
     /// <summary>
     /// 是否启用独立文件
     /// </summary>
-    public bool EnableStandalone { get; set; } = false;
+    public bool EnableStandalone { get; set; } = true;
     /// <summary>
     /// 是否启用请求头
     /// </summary>
@@ -32,7 +32,7 @@ public class DocumentConvertArguments : TaskArgumentBase
     /// <summary>
     /// 嵌入资源
     /// </summary>
-    public bool EnableEmbedResources { get; set; } = false;
+    public bool EnableEmbedResources { get; set; } = true;
     /// <summary>
     /// 启用目录
     /// </summary>
