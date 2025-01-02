@@ -24,15 +24,11 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
     private readonly ILocalizer _l = localizer;
 
     public override async Task<Fin<Unit>> ExecuteAsync(TaskItem taskItem,
-        DocumentConvertArguments? argments,
+        DocumentConvertArguments argments,
         Action<double> progressCallback,
         CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        if (argments == null)
-        {
-            throw new ArgumentNullException(nameof(argments));
-        }
 
         progressCallback(1);
 
