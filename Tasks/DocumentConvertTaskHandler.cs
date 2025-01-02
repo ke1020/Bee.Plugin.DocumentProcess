@@ -9,7 +9,7 @@ using Ke.DocumentProcess.Models.Exceptions;
 using Ke.DocumentProcess.Pandoc;
 using Ke.DocumentProcess.Pandoc.Models;
 
-using LanguageExt.Common;
+using LanguageExt;
 
 namespace Bee.Plugin.DocumentProcess.Tasks;
 
@@ -23,7 +23,7 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
     private readonly PandocDocumentProcessOptions _pandocDocumentProcessOptions = pandocDocumentProcessOptions;
     private readonly ILocalizer _l = localizer;
 
-    public override async Task<Result<bool>> ExecuteAsync(TaskItem taskItem,
+    public override async Task<Fin<Unit>> ExecuteAsync(TaskItem taskItem,
         DocumentConvertArguments? argments,
         Action<double> progressCallback,
         CancellationToken cancellationToken = default)
@@ -46,7 +46,7 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
                 ;
             if (!exists)
             {
-                return new Result<bool>(new NotSupportedInputFormatException($"{_l["Errors.NotSupported.InputFormat"]} {ext}"));
+                return Fin<Unit>.Fail($"{_l["Errors.NotSupported.InputFormat"]} {ext}");
             }
             inputFormat = _documentConverter.AvailableInputFormats
                 .FirstOrDefault(x => x.Value.Equals(ext, StringComparison.OrdinalIgnoreCase))
@@ -63,7 +63,7 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
         // 输出扩展名
         if (!_documentConverter.AvailableOutputFormats.TryGetValue(argments.OutputFormat ?? string.Empty, out var outputExtension))
         {
-            return new Result<bool>(new NotSupportedOutputFormatException($"{_l["Errors.NotSupported.OutputFormat"]} {argments.OutputFormat}"));
+            return Fin<Unit>.Fail($"{_l["Errors.NotSupported.OutputFormat"]} {argments.OutputFormat}");
         }
 
         // 输入文件是否 url 地址
@@ -108,7 +108,7 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
         {
             if (string.IsNullOrWhiteSpace(_pandocDocumentProcessOptions.PdfEnginePath))
             {
-                return new Result<bool>(new NotSupportedPdfEngineException());
+                return Fin<Unit>.Fail(new NotSupportedPdfEngineException());
             }
 
             args = args.SetPdfEngine(_pandocDocumentProcessOptions.PdfEnginePath)
@@ -125,6 +125,6 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
         // 执行转换
         await _documentConverter.ConvertAsync(args.Build(), cancellationToken);
         progressCallback(100);
-        return new Result<bool>(true);
+        return Fin<Unit>.Succ(Unit.Default);
     }
 }
