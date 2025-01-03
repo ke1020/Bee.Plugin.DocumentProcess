@@ -31,7 +31,7 @@ public class DocumentProcessPlugin(IServiceProvider serviceProvider) : PluginBas
     public override void RegisterServices(IServiceCollection services)
     {
         services.AddTransient<IPlugin, DocumentProcessPlugin>();
-        services.AddSingleton<ILocalizaitonResourceContributor, DocumentProcessLocalizationResourceContributor>();
+        services.AddSingleton<ILocalizationResourceContributor, DocumentProcessLocalizationResourceContributor>();
         services.AddSingleton<INavigationCommand, DocumentConvertNavigationCommand>();
 
         // 注入视图模型
