@@ -67,8 +67,8 @@ public class DocumentProcessPlugin(IServiceProvider serviceProvider) : PluginBas
         {
             pandocOptions = new PandocDocumentProcessOptions
             {
-                PandocPath = Path.Combine(pluginRootPath, "pandoc-3.6/pandoc.exe"),
-                PdfEnginePath = Path.Combine(pluginRootPath, "TinyTeX/bin/windows/xelatex.exe")
+                PandocPath = Path.Combine(pluginRootPath, "packages/pandoc-3.6/pandoc.exe"),
+                PdfEnginePath = Path.Combine(pluginRootPath, "packages/TinyTeX/bin/windows/xelatex.exe")
             };
         }
 

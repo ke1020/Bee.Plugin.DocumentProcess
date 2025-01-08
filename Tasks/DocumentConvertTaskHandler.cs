@@ -11,13 +11,15 @@ using Ke.DocumentProcess.Pandoc.Models;
 
 using LanguageExt;
 
+using Serilog;
+
 namespace Bee.Plugin.DocumentProcess.Tasks;
 
 public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
     PandocDocumentProcessOptions pandocDocumentProcessOptions,
     ICoverHandler coverHandler,
     ILocalizer localizer) :
-    TaskHandlerBase<DocumentConvertArguments> (coverHandler)
+    TaskHandlerBase<DocumentConvertArguments>(coverHandler)
 {
     private readonly IDocumentConverter _documentConverter = documentConverter;
     private readonly PandocDocumentProcessOptions _pandocDocumentProcessOptions = pandocDocumentProcessOptions;
@@ -118,9 +120,17 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
 
         progressCallback(10);
 
-        // 执行转换
-        await _documentConverter.ConvertAsync(args.Build(), cancellationToken);
-        progressCallback(100);
-        return Fin<Unit>.Succ(Unit.Default);
+        try
+        {
+            // 执行转换
+            await _documentConverter.ConvertAsync(args.Build(), cancellationToken);
+            progressCallback(100);
+            return Fin<Unit>.Succ(Unit.Default);
+        }
+        catch (Exception e)
+        {
+            Log.Error(e.Message, e);
+            return Fin<Unit>.Fail($"{_l["Task.Execution.Failed"]}, {fileName}");
+        }
     }
 }
