@@ -11,19 +11,21 @@ using Ke.DocumentProcess.Pandoc.Models;
 
 using LanguageExt;
 
-using Serilog;
+using Microsoft.Extensions.Logging;
 
 namespace Bee.Plugin.DocumentProcess.Tasks;
 
 public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
     PandocDocumentProcessOptions pandocDocumentProcessOptions,
     ICoverHandler coverHandler,
-    ILocalizer localizer) :
+    ILocalizer localizer,
+    ILogger<DocumentConvertTaskHandler> logger) :
     TaskHandlerBase<DocumentConvertArguments>(coverHandler)
 {
     private readonly IDocumentConverter _documentConverter = documentConverter;
     private readonly PandocDocumentProcessOptions _pandocDocumentProcessOptions = pandocDocumentProcessOptions;
     private readonly ILocalizer _l = localizer;
+    private readonly ILogger<DocumentConvertTaskHandler> _logger = logger;
 
     public override async Task<Fin<Unit>> ExecuteAsync(TaskItem taskItem,
         DocumentConvertArguments argments,
@@ -129,7 +131,7 @@ public class DocumentConvertTaskHandler(IDocumentConverter documentConverter,
         }
         catch (Exception e)
         {
-            Log.Error(e.Message, e);
+            _logger.LogError(e.Message);
             return Fin<Unit>.Fail($"{_l["Task.Execution.Failed"]}, {fileName}");
         }
     }
